@@ -3,6 +3,5 @@ module.exports = {
     ADMIN: 'Admin',
     SUPERVISOR: 'Supervisor',
     WORKER: 'Worker',
-    EMPLOYEE: 'Employee',
   };
   

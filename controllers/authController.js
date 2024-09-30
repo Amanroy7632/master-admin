@@ -12,6 +12,7 @@ const generateToken = (user) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
+    // console.log('Working login route');
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
@@ -20,6 +21,7 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
+    
     const token = generateToken(user);
     res.json({ token, user });
   } catch (err) {
