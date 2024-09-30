@@ -12,7 +12,8 @@ const app = express();
 connectDB();
 
 // Middleware to parse JSON
-app.use(express.json());
+app.use(express.json({limit:"16kb"}));
+app.use(express.urlencoded({extended:true,limit:'16kb'}));
 app.use('/uploads', express.static('uploads'));
 
 // Routes
