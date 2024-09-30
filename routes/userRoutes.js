@@ -1,9 +1,11 @@
 const express = require('express');
-const { createRoles, createEmployee, getAllUsers } = require('../controllers/userController');
+const { createRoles, createEmployee, getAllUsers , createSuper} = require('../controllers/userController');
 const { protect, authorizeRoles } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
+
+router.post('/createSuper', createSuper);
 // Create Admin (Super Admin only)
 router.post('/createRoles', protect, authorizeRoles('SuperAdmin'), createRoles);
 

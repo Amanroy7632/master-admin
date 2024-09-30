@@ -1,5 +1,29 @@
 const User = require('../models/User');
 
+
+exports.createSuper = async (req, res) => {
+  
+  const { name , email, password, role } = req.body;
+
+  try {
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: 'Email already exists' });
+    }
+
+    const newSuperAdmin = new User({ name , email, password, role });
+    // res.json(newSuperAdmin);
+    await newSuperAdmin.save();
+
+    res.status(201).json({ message: `${role} created successfully`, empId: newSuperAdmin.empId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+
+
 // Create Admin (Only Super Admin can do this)
 exports.createRoles = async (req, res) => {
   if (req.user.role !== 'SuperAdmin') {
